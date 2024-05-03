@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    // baseURL은 절대경로를 기준으로 하는 기본 디렉터리를 지정
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -22,5 +24,10 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  // 해당 경로와 해당 경로에 매핑하는 속성을 말한다.
+  "paths":{
+    "pages/*": ["pages/*"],
+    "components/*": ["components/*"]
+  }
 }
