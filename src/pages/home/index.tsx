@@ -1,16 +1,14 @@
+import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import PostList from '../../components/PostList';
+
 export default function Home() {
   return (
     <div>
-      <header>
-        <div>
-          <ul>
-            <li>글쓰기</li>
-            <li>프로필</li>
-          </ul>
-        </div>
-      </header>
-      <main></main>
-      <footer></footer>
+      <Header />
+      <PostList />
+      <Footer />
     </div>
   );
 }
