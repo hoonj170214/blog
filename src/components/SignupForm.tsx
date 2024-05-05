@@ -1,6 +1,8 @@
-import { EventHandler, useState } from 'react';
-
+import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { app } from 'firebaseApp';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 export default function SignupForm() {
   const [error, setError] = useState<string>('');
@@ -8,12 +10,25 @@ export default function SignupForm() {
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      // auth를 사용하기 위해서 사전에 정의한 app을 넣어줘야 함
+      const auth = getAuth(app);
+      await createUserWithEmailAndPassword(auth, email, password);
+      toast.success('회원가입에 성공했습니다!');
+    } catch (error) {
+      console.log(error);
+      toast.error('회원가입에 실패했습니다' + error);
+    }
+  };
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = e;
-    console.log(name, value);
-    console.log(error);
+    // console.log(name, value);
+    // console.log(error);
     if (name === 'email') {
       setEmail(value);
       const validRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
@@ -47,7 +62,8 @@ export default function SignupForm() {
     }
   };
   return (
-    <form action="/post" method="post" className="form form-lg">
+    // 이제 폼에서 action, method를 정의하지 않고, onSubmit만 정의해줘도 된다.
+    <form onSubmit={onSubmit} className="form form-lg">
       <h1 className="form__title">회원가입</h1>
       <div className="form__block">
         <label htmlFor="email">이메일</label>
