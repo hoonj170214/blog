@@ -31,6 +31,7 @@ export const AuthContextProvider = ({ children }: AuthProps) => {
     });
   }, [auth]);
 
+  // 유동적인 값을 관리하는 경우에는 Provider을 새로 만들어주는 것이 좋다.
   return (
     <AuthContext.Provider value={{ user: currentUser }}>
       {children}
