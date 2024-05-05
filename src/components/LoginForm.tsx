@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import { app } from 'firebaseApp';
@@ -8,6 +8,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,6 +16,8 @@ export default function LoginForm() {
       const auth = getAuth(app);
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('로그인에 성공했습니다.');
+      // 로그인이 성공한 경우, 로그아웃 전에 방문한 페이지로 강제로 이동되었는데, useNavegate로 루트페이지로 이동하도록 수정했음
+      navigate('/');
     } catch (error: any) {
       console.log(error);
       toast.error('로그인에 실패했습니다.', error?.code);
