@@ -27,8 +27,7 @@ export default function SignupForm() {
     const {
       target: { name, value },
     } = e;
-    // console.log(name, value);
-    // console.log(error);
+
     if (name === 'email') {
       setEmail(value);
       const validRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
@@ -70,6 +69,7 @@ export default function SignupForm() {
         <input
           type="email"
           name="email"
+          value={email}
           id="email"
           required
           onChange={handleOnChange}
@@ -81,6 +81,7 @@ export default function SignupForm() {
         <input
           type="password"
           name="password"
+          value={password}
           id="password"
           required
           onChange={handleOnChange}
@@ -92,6 +93,7 @@ export default function SignupForm() {
         <input
           type="password"
           name="password_confirm"
+          value={passwordConfirm}
           id="password_confirm"
           required
           onChange={handleOnChange}
