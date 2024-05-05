@@ -6,7 +6,7 @@ import Router from './components/Router';
 
 function App() {
   const auth = getAuth(app);
-  console.log(auth);
+
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     !!auth?.currentUser
   );
